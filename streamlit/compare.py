@@ -33,8 +33,10 @@ def compare_video(music_name, sync_frame):
 
     # 경로 설정
     key_path = "./dataset/json/"
-    video_path = "./datast/target/"
-    gt_path = f"{music_name}_gt.mp4"
+    video_path = "./dataset/target/"
+    #gt_path = f"{music_name}_gt.mp4"
+    gt_path = f"{music_name}.mp4"
+    
     target_video = f"{music_name}_prac.mp4"
 
     # video 정보 저장 파일 생성
@@ -42,8 +44,9 @@ def compare_video(music_name, sync_frame):
 
     # video 불러오기 및 video 설정 저장
     FRAME_WINDOW = st.image([])
-    # cap = cv2.VideoCapture(os.path.join(video_path, target_video))
-    cap = cv2.VideoCapture('./dataset/target/hope_prac.mp4')
+    print(target_video)
+    cap = cv2.VideoCapture(os.path.join(video_path, target_video)) # 수정 11
+    #cap = cv2.VideoCapture('./dataset/target/hope_prac.mp4')
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     fps = cap.get(cv2.CAP_PROP_FPS)
     out = cv2.VideoWriter("./dataset/result/" + music_name + ".mp4", fourcc, fps, (640, 480))

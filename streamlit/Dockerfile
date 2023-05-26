@@ -16,4 +16,5 @@ EXPOSE 8080
 
 COPY . /app
 
+RUN conda install -c intel mkl_fft
 CMD streamlit run --server.port 8080 --server.enableCORS false app.py

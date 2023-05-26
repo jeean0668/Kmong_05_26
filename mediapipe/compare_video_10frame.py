@@ -31,8 +31,8 @@ mp_drawing_styles = mp.solutions.drawing_styles
 # 경로 설정
 key_path = "save_json"
 video_path = "keypoints"
-gt_path = "hot_gt.mp4"
-target_video = "hot_prac.mp4"
+gt_path = "gt.mp4"
+target_video = "prac.mp4"
 
 # video 정보 저장 파일 생성
 os.makedirs(os.path.join(key_path, target_video), exist_ok=True)
@@ -93,7 +93,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         
         # save keypoints
         keypoints = config.make_keypoints(landmarks, mp_pose, video_inform)
-        with open(f'save_json/hot_gt.mp4/{i:0>4}.json') as json_file:
+        with open(f'save_json/{gt_path}/{i:0>4}.json') as json_file:
             hot_gt_json = json.load(json_file)
         
         with open(os.path.join(key_path, target_video, f'{i:0>4}.json'), "w") as f:
@@ -106,12 +106,14 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             e_p = min(i+compare_frame, gt_inform['total_frame']) # end point
             
             # body part별로(왼다리, 오른다리, 왼팔, 오른팔, 몸통) normalize된 값 vector 추출
-            prac = hot_prac.extract_vec_norm_by_part(keypoints)
+            # prac = hot_prac.extract_vec_norm_by_part(keypoints)
+            prac = hot_prac.extract_vec_norm_by_small_part(keypoints) # 수정 부분 2
             total = [[],[],[],[],[],[]]
             for j in range(s_p,e_p,1):
-                with open(f'save_json/hot_gt.mp4/{j:0>4}.json') as json_file:
-                    hot_gt_temp = json.load(json_file)
-                gt = hot_gt.extract_vec_norm_by_part(hot_gt_temp)
+                with open(f'save_json/{gt_path}/{j:0>4}.json') as json_file: # 수정부분 3
+                    hot_gt_temp = json.load(json_file) 
+                #gt = hot_gt.extract_vec_norm_by_part(hot_gt_temp)
+                gt = hot_gt.extract_vec_norm_by_small_part(hot_gt_temp) # 수정부분 4
                 s = 0
                 for part in range(5):
                     temp = metric.l2_normalize(gt[part], prac[part])

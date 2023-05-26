@@ -89,7 +89,7 @@ def compare_video(GT_video_name, target_video_name):
                 hot_prac_temp = hot_prac_temp[1:]
             hot_prac_temp.append(keypoints)
             
-            with open(f'save_json/hot_gt.mp4/{i:0>4}.json') as json_file:
+            with open(f'save_json/{gt_path}/{i:0>4}.json') as json_file:
                 hot_gt_json = json.load(json_file)
             
             if i%(compare_frame*2) == compare_frame or i==0:
@@ -101,10 +101,10 @@ def compare_video(GT_video_name, target_video_name):
                 displace_prac = hot_prac.extract_vec_norm_by_small_part_diff(hot_prac_temp[0],keypoints)
                 total = [[] for _ in range(len(prac)+1)]
                 for j in range(s_p,e_p,1):
-                    with open(f'save_json/hot_gt.mp4/{j:0>4}.json') as json_file:
+                    with open(f'save_json/{gt_path}/{j:0>4}.json') as json_file:
                         hot_gt_temp = json.load(json_file)
                     b_j = max(0,j-10)
-                    with open(f'save_json/hot_gt.mp4/{b_j:0>4}.json') as json_file:
+                    with open(f'save_json/{gt_path}/{b_j:0>4}.json') as json_file:
                         bhot_gt_temp = json.load(json_file)
                     gt = hot_gt.extract_vec_norm_by_small_part(hot_gt_temp)
                     s = 0
@@ -122,10 +122,17 @@ def compare_video(GT_video_name, target_video_name):
                     else : speed_metric.append("good")
                 
             array = (np.zeros((gt_resize[1],gt_resize[0],3))+255).astype(np.uint8)
+            
             prac_image = hot_prac.visual_back_color(image, keypoints, speed_metric)
             gt_image = hot_gt.visual_back_color(array, hot_gt_json, speed_metric)
             
-            image = cv2.hconcat([gt_image,prac_image])
+            #image = cv2.hconcat([gt_image,prac_image]) #
+            # image = cv2.vconcat([gt_image,prac_image]) # 수정 9
+            dim = (640, 360)
+            gt_image = cv2.resize(gt_image, dim, interpolation=cv2.INTER_AREA) # 추가 1
+            prac_image = cv2.resize(prac_image, dim, interpolation=cv2.INTER_AREA) # 추가 2
+            image = cv2.vconcat([gt_image, prac_image]) # 수정 9 + 추가 1
+            
             l=len(total[0])//2
             cv2.putText(image, f"speed  : {speed_metric[-1]}", (10, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 0), 2)
             for txt in range(len(speed_metric)-1):
@@ -139,3 +146,6 @@ def compare_video(GT_video_name, target_video_name):
                 break
         cap.release()
         cv2.destroyAllWindows()
+
+if __name__ == "__main__": # 내가 바꾼 내용
+    compare_video('gt.mp4', 'prac.mp4')

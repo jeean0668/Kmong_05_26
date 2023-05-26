@@ -12,7 +12,7 @@ from compare import compare_video
 
 UPLOAD = 'upload video'
 WEBCAM = 'filmed with webcam'
-MUSIC_OPTIONS = ['call me baby', 'next level', 'hope']
+MUSIC_OPTIONS = ['call me baby', 'next level', 'hope', 'gt']
 SIDEBAR_OPTIONS = [UPLOAD, WEBCAM]
 
 # 비디오 보여주기
@@ -36,6 +36,7 @@ def upload_video(music_name):
         # 업로드 완료되면 평가받기
         with st.container():
             with st.spinner('Wait...'):
+                print(music_name)
                 compare_video(music_name, sync_frame)
                 # time.sleep(30)
                 # st.header("당신의 댄스 실력은")
@@ -73,6 +74,8 @@ def upload_webcam(music_name):
     if finish:
         with st.container():
             with st.spinner('Wait...'):
+                print(music_name)
+                print("0000000000")
                 compare_video(music_name, sync_frame)
 
 
