@@ -13,6 +13,15 @@ conda install -n env_name python=3.7
 ```bash
 conda activate env_name
 ```
+
+### git clone
+1. github에서 저장소를 clone 합니다.
+
+```bash
+git clone https://github.com/jeean0668/Kmong_05_26/edit/main/README.md
+cd Kmong_05_26
+```
+
 ### Pip로 requirement.txt 설치
 
 1. 다음 명령어를 실행하여 requirements.txt 파일의 패키지를 설치합니다.
