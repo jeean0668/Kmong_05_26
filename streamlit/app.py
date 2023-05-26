@@ -36,7 +36,7 @@ def upload_video(music_name):
         # 업로드 완료되면 평가받기
         with st.container():
             with st.spinner('Wait...'):
-                print(music_name)
+              
                 compare_video(music_name, sync_frame)
                 # time.sleep(30)
                 # st.header("당신의 댄스 실력은")
@@ -74,8 +74,7 @@ def upload_webcam(music_name):
     if finish:
         with st.container():
             with st.spinner('Wait...'):
-                print(music_name)
-                print("0000000000")
+               
                 compare_video(music_name, sync_frame)
 
 

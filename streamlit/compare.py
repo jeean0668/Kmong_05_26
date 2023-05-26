@@ -44,7 +44,6 @@ def compare_video(music_name, sync_frame):
 
     # video 불러오기 및 video 설정 저장
     FRAME_WINDOW = st.image([])
-    print(target_video)
     cap = cv2.VideoCapture(os.path.join(video_path, target_video)) # 수정 11
     #cap = cv2.VideoCapture('./dataset/target/hope_prac.mp4')
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
