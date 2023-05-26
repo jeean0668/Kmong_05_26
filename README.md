@@ -7,7 +7,7 @@
 3. 다음 명령어를 실행하여 Python 3.7을 설치합니다.
 
 ```bash
-conda install -n env_name python=3.7
+conda create -n env_name python=3.7
 ```
 4. conda enviroment 를 활성화 합니다.
 ```bash
@@ -42,9 +42,9 @@ pip install -r requirements.txt
 4. cd mediapipe 를 입력해, mediapipe 디렉토리(폴더)로 이동합니다. 그리고, extract_gt_keypoints.py를 실행하여, 정답 json을 얻습니다.
    ```bash
     cd mediapipe
-    python extract_gt_keypoints.py
+    python extract_gt_keypoint.py
    ```
-5. python compare_norm_veccos_10_framep.py 테스트 해봅니다.
+5. python compare_norm_veccos_10frame.py 테스트 해봅니다.
    ```bash
     python compare_norm_veccos_10frame.py
    ```
