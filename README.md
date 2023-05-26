@@ -18,7 +18,7 @@ conda activate env_name
 1. github에서 저장소를 clone 합니다.
 
 ```bash
-git clone https://github.com/jeean0668/Kmong_05_26/edit/main/README.md
+git clone https://github.com/jeean0668/Kmong_05_26.git
 cd Kmong_05_26
 ```
 
