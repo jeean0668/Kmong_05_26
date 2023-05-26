@@ -20,13 +20,19 @@ pip install -r requirements.txt
 
 # 2. Get gt json file
 
-1. 학습 영상을 gt.mp4, 비교 영상을 prac.mp4로 이름을 변경해 줍니다.
-2. cd mediapipe 를 입력해, mediapipe 디렉토리(폴더)로 이동합니다. 그리고, extract_gt_keypoints.py를 실행하여, 정답 json을 얻습니다.
+1. mediapipe 디렉토리로 이동해서, keypoints라는 directory를 생성합니다.
+```bash
+   cd mediapipe
+   mkdir keypoints
+```
+2. keypoints 폴더 안에 학습 영상을 위치시킵니다.
+3. 학습 영상을 gt.mp4, 비교 영상을 prac.mp4로 이름을 변경해 줍니다.
+4. cd mediapipe 를 입력해, mediapipe 디렉토리(폴더)로 이동합니다. 그리고, extract_gt_keypoints.py를 실행하여, 정답 json을 얻습니다.
    ```bash
     cd mediapipe
     python extract_gt_keypoints.py
    ```
-3. python compare_norm_veccos_10_framep.py 테스트 해봅니다.
+5. python compare_norm_veccos_10_framep.py 테스트 해봅니다.
    ```bash
     python compare_norm_veccos_10frame.py
    ```
@@ -40,9 +46,12 @@ pip install -r requirements.txt
 2. mediapipe/save_json 폴더 안에 있는 gt.mp4 폴더를 
     통째로 streamlit/dataset/json 폴더 안에 복사 붙여넣기 합니다.
     ```bash
-    mv ../mediapipe/save_json/gt.mp4 dataset/json/gt.mp4
+    cp ../mediapipe/save_json/gt.mp4 dataset/json/gt.mp4
     ```
 3. streamlit/dataset/video 에 정답 영상을 복사 붙여넣기 합니다.
+   ```bash
+   cp ../mediapipe/keypoints/gt.mp4 dataset/video
+   ```
 
 # 4. 실행
 
