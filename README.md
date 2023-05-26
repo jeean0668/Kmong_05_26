@@ -9,7 +9,10 @@
 ```bash
 conda install -n env_name python=3.7
 ```
-
+4. conda enviroment 를 활성화 합니다.
+```bash
+conda activate env_name
+```
 ### Pip로 requirement.txt 설치
 
 1. 다음 명령어를 실행하여 requirements.txt 파일의 패키지를 설치합니다.
@@ -46,7 +49,7 @@ pip install -r requirements.txt
 2. mediapipe/save_json 폴더 안에 있는 gt.mp4 폴더를 
     통째로 streamlit/dataset/json 폴더 안에 복사 붙여넣기 합니다.
     ```bash
-    cp ../mediapipe/save_json/gt.mp4 dataset/json/gt.mp4
+    cp -R ../mediapipe/save_json/gt.mp4 dataset/json/gt.mp4
     ```
 3. streamlit/dataset/video 에 정답 영상을 복사 붙여넣기 합니다.
    ```bash
